@@ -1,3 +1,12 @@
+#!/usr/bin/env python
+
+"""
+This script is a web scraper that retrieves historical ratings for players in the FIFA universe. Specifically, we
+are extracting information around the potential and overall ratings for each player at a given date, in addition to
+data about the players themselves (age, position, team, nationality).
+"""
+
+
 import pandas as pd
 from bs4 import BeautifulSoup
 import requests

@@ -1,3 +1,10 @@
+#!/usr/bin/env python
+
+"""
+The output of the web scraper produces an unnecessarily large file - it suffices to have only the observations when a
+change other than the 'rating date' took place. This actually reduces the size of the dataset by a factor of 20.
+"""
+
 import pandas as pd
 
 # first, open the full dataset
@@ -13,6 +20,7 @@ full_rating_dataset['rating_date'] = pd.to_datetime(full_rating_dataset['rating_
 
 # now, group by all relevant features and take the minimum date
 compressed_fifa_ratings = full_rating_dataset.groupby(['player_url', 'age', 'overall', 'potential', 'team',
-                                                       'team_id', 'nationality', 'position'], as_index=False)['rating_date'].min()
+                                                       'team_id', 'nationality', 'position'], as_index=False)[
+    'rating_date'].min()
 compressed_fifa_ratings.sort_values(by=['player_url', 'rating_date'], inplace=True)
 compressed_fifa_ratings.to_csv('compressed_player_rating_dataset.csv')

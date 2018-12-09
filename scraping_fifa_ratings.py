@@ -5,6 +5,7 @@ from selenium import webdriver
 from operator import itemgetter
 
 
+# this function retrieves links to all the historical versions of rating we can mine
 def get_links_to_historical_views():
     driver = webdriver.Chrome(executable_path='C:/webdrivers/chromedriver.exe')
     driver.get('https://sofifa.com/players')
@@ -23,7 +24,6 @@ def get_links_to_historical_views():
 
 
 # now, for all the extracted links get the relevant player information
-
 def get_player_names_and_ratings(player_rating_page):
     soup = BeautifulSoup(player_rating_page.text, 'html.parser')
 
@@ -69,16 +69,20 @@ def get_player_names_and_ratings(player_rating_page):
     player_ratings = soup.select('.label.p')
     all_player_names = soup.find_all('a')
 
+    position_tags = soup.find_all("div", {"class": "text-ellipsis rtl"})
+    position_tags = [p.text for p in position_tags]
+
     # now, let us iterate through the full set of 'clean' attributes and append all relevant information for each player to a list
+
     i = 0
     for a in all_player_names:
         try:
             if '/player/' in str(a['href']):
                 player_names_and_ratings.append([a['href'], a['title'], game_version, rating_date,
                                                  player_ratings[i].text, player_ratings[i + 1].text,
-                                                 player_ages[int(i/2)], revised_player_team[int(i/2)],
-                                                 revised_player_team_id[int(i/2)], player_nationalities[int(i/2)], ])
-                # print(player_names_and_ratings)
+                                                 player_ages[int(i / 2)], revised_player_team[int(i / 2)],
+                                                 revised_player_team_id[int(i / 2)], player_nationalities[int(i / 2)],
+                                                 position_tags[int(i / 2)], ])
                 i += 2
         except:
             continue
@@ -86,6 +90,7 @@ def get_player_names_and_ratings(player_rating_page):
     return player_names_and_ratings
 
 
+# this function allows us to scrape all the relevant player information for each historical version
 def scrape_all_info_for_dated_version(link):
     all_ratings_for_one_date = []
     i = 0
@@ -107,18 +112,22 @@ def scrape_all_info_for_dated_version(link):
 
     return all_ratings_for_one_date
 
+# initiate an empty dataframe that we will append scraped information to
+df = pd.DataFrame(columns=['player_url', 'name', 'game_version', 'rating_date', 'overall',
+                           'potential', 'age', 'team', 'team_id', 'nationality', 'position'])
+df.to_csv('fuller_player_rating_dataset.csv')
 
+# retrieve the links to the historical versions to be mined
 all_historical_links = get_links_to_historical_views()
-print(all_historical_links)
-# links = ['https://sofifa.com/players?v=07&e=154818&set=true']
+print(len(all_historical_links), ' dated versions to mine')
 
-all_player_info = []
+# iterate through each historical version and append any new ratings to the existing csv
+i = 1
 for l in all_historical_links:
-    print('Now mining data from', l)
+    print('Now mining data from link', i, 'of', len(all_historical_links))
     all_ratings = scrape_all_info_for_dated_version(l)
-    all_player_info.extend(all_ratings)
-
-all_player_info = pd.DataFrame(all_player_info, columns=['player_url', 'name', 'game_version', 'rating_date', 'overall',
-                                                         'potential', 'age', 'team', 'team_id', 'nationality'])
-all_player_info.drop_duplicates(inplace=True)
-all_player_info.to_csv('full_player_rating_dataset.csv')
+    all_player_info = pd.DataFrame(all_ratings,
+                                   columns=['player_url', 'name', 'game_version', 'rating_date', 'overall',
+                                            'potential', 'age', 'team', 'team_id', 'nationality', 'position'])
+    all_player_info.to_csv('fuller_player_rating_dataset.csv', mode='a', header=False)
+    i += 1

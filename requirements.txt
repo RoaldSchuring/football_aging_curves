@@ -1,5 +1,5 @@
 ipywidgets==7.4.2
 pandas==0.23.4
 plotly==3.4.2
-compressed_player_rating_dataset.csv
-team_mappings.csv
+data/compressed_player_rating_dataset.csv
+data/team_mappings.csv

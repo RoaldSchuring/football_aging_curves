@@ -1,1 +1,3 @@
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/RoaldSchuring/Modeling-Football-Aging-Curves/blob/master/aging_curves_interactive_visualization.ipynb/be72757f4e8fa1fe667db3e7cd50b75886a29e50?filepath=aging_curves_interactive_visualization.ipynb)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/RoaldSchuring/Modeling-Football-Aging-Curves/f35dfea57337d0b62196bb69d0b863d36a87ef96?filepath=aging_curves_interactive_visualization.ipynb)
+
+https://mybinder.org/v2/gh/RoaldSchuring/Modeling-Football-Aging-Curves/f35dfea57337d0b62196bb69d0b863d36a87ef96?filepath=aging_curves_interactive_visualization.ipynb

@@ -1,5 +1,5 @@
 Click the button below for a direct link to the interactive aging curve visualization tool:
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/RoaldSchuring/Modeling-Football-Aging-Curves/f35dfea57337d0b62196bb69d0b863d36a87ef96?filepath=aging_curves_interactive_visualization.ipynb)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/RoaldSchuring/Modeling-Football-Aging-Curves/7fe7bda7ef30f829ea10b844a874d8f876463b2d?filepath=aging_curves_interactive_visualization.ipynb)
 
 
 # Building Football Player Aging Curves using FIFA Player Ratings
@@ -35,7 +35,7 @@ In this project, a dataset of player ratings has been scraped from the website w
 This raw dataset is about 1 GB in size, but for the purposes of our aging curve investigation contains unnecessary duplicate values. We are interested in how player ratings evolve year over year, and do not need ten successive biweekly datapoints telling us that a player has remained at the same overall rating and potential level. As such, the file 'compressing_fifa_rating.py' removes any unnecessary rows, and preserves only those columns required to run our aging curve analysis.
 Using the compressed dataset, the aging_curves_analysis.ipynb notebook explores how aging curves can be computed, and demonstrates a few examples for top players in our dataset. Subsequently, aging curves are computed by position and team to demonstrate any differences that exist along those dimensions.
 To allow any interested users to explore the aging curves more fully, an interactive visualization tool has been built using Plotly. The visualization tool also uses the difflib package, which has been saved in the repo also. Credits to (https://github.com/enthought/Python-2.7.3/blob/master/Lib/difflib.py).
-The [visualization tool](https://mybinder.org/v2/gh/RoaldSchuring/Modeling-Football-Aging-Curves/f35dfea57337d0b62196bb69d0b863d36a87ef96?filepath=aging_curves_interactive_visualization.ipynb) can be reached using the button at the top of this README file, or using the adjacent hyperlink.
+The [visualization tool](https://mybinder.org/v2/gh/RoaldSchuring/Modeling-Football-Aging-Curves/7fe7bda7ef30f829ea10b844a874d8f876463b2d?filepath=aging_curves_interactive_visualization.ipynb) can be reached using the button at the top of this README file, or using the adjacent hyperlink.
 
 
 ### Getting Started
